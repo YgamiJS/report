@@ -238,7 +238,7 @@
     Отсутствуют:
 
     ${students
-      .filter((student) => !here.includes(student.id))
+      .filter((student) => !here.includes(String(student.id)))
       .map((item) => `- ${item.name}\n\n`)
       .join("")}
     `
