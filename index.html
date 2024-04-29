@@ -4,9 +4,112 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="#" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      *,
+      *::after,
+      *::before {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      ul,
+      ol {
+        list-style: none;
+      }
+
+      body {
+        background: #e9e8e8;
+        scroll-behavior: smooth;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 15px;
+      }
+
+      .wrapper {
+        display: flex;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+        color: #0e1621;
+      }
+
+      .title {
+        margin: 15px 0;
+      }
+
+      .report {
+        border: 3px solid #2f6ea5;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        padding: 15px;
+      }
+
+      .report .caption {
+        text-align: left;
+        margin: 10px 0;
+        font-size: 18px;
+      }
+
+      .report__thead {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .report__tbody {
+        text-align: center;
+        font-size: 17px;
+      }
+
+      .report__tbody .report__tr {
+        border: 3px solid #0e1621;
+      }
+
+      .report__tbody .report__td {
+        vertical-align: top;
+        padding: 8px 0;
+      }
+
+      .report__here {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+      }
+
+      .wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .getReport {
+        background: white;
+        height: min-content;
+        padding: 15px;
+        border-radius: 5px;
+        border: 3px solid #2f6ea5;
+        cursor: pointer;
+      }
+
+      .getReport:active {
+        border: 3px solid #0e1621;
+      }
+    </style>
     <title>Отчет</title>
-    <script type="module" crossorigin src="/assets/index-7MPbZllH.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CaQzwY6g.css">
   </head>
   <body>
     <div class="wrappper">
@@ -29,5 +132,152 @@
         </table>
       </div>
     </div>
+    <script>
+      const reportBody = document.querySelector(".report__tbody");
+      const getReport = document.querySelector(".button");
+
+      const students = [
+        {
+          id: 0,
+          name: "Чиликин",
+        },
+        {
+          id: 1,
+          name: "Беспалов",
+        },
+        {
+          id: 2,
+          name: "Ширин",
+        },
+        {
+          id: 3,
+          name: "Ковшар",
+        },
+        {
+          id: 4,
+          name: "Жалдак",
+        },
+        {
+          id: 5,
+          name: "Поляков",
+        },
+        {
+          id: 6,
+          name: "Рыбникова",
+        },
+        {
+          id: 7,
+          name: "Сахаров",
+        },
+        {
+          id: 8,
+          name: "Пушкин",
+        },
+        {
+          id: 9,
+          name: "Кузнецов",
+        },
+        {
+          id: 10,
+          name: "Демидов",
+        },
+        {
+          id: 11,
+          name: "Дьяченко",
+        },
+        {
+          id: 12,
+          name: "Котельников",
+        },
+        {
+          id: 13,
+          name: "Фаустов",
+        },
+        {
+          id: 14,
+          name: "Попов",
+        },
+        {
+          id: 15,
+          name: "Милютин",
+        },
+        {
+          id: 16,
+          name: "Романцев",
+        },
+        {
+          id: 17,
+          name: "Хоменко",
+        },
+        {
+          id: 18,
+          name: "Кочетова",
+        },
+        {
+          id: 19,
+          name: "Макрушина",
+        },
+        {
+          id: 20,
+          name: "Тихонова",
+        },
+      ];
+
+      let here = [];
+
+      function addOrRemoveStudentHere(id) {
+        here.includes(id)
+          ? (here = here.filter((studentId) => studentId != id))
+          : here.push(id);
+      }
+
+      function drawReport() {
+        const str =
+          here.length < students.length
+            ? `
+    Отсутствуют:
+
+    ${students
+      .filter((student) => !here.includes(student.id))
+      .map((item) => `- ${item.name}\n\n`)
+      .join("")}
+    `
+            : "Присутствуют все";
+
+        navigator.clipboard.writeText(str.trim());
+
+        alert("Скопировано");
+      }
+
+      function list(students) {
+        reportBody.innerHTML = "";
+
+        students.forEach((item) => {
+          const tr = document.createElement("tr");
+
+          tr.className = "report__tr";
+
+          tr.innerHTML = `
+        <td class="report__td report__td_name">
+            ${item.name}
+        </td>
+        <td class="report__td report__td_here">
+            <input class="report__here" type="checkbox" data-id="${item.id}"/>              
+        </td>
+          `;
+
+          reportBody.appendChild(tr);
+
+          const checkbox = tr.querySelector(".report__here");
+
+          checkbox.addEventListener("change", (event) => {
+            addOrRemoveStudentHere(event.target.dataset.id);
+          });
+        });
+      }
+
+      list(students);
+      getReport.addEventListener("click", () => drawReport());
+    </script>
   </body>
 </html>
