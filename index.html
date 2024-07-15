@@ -247,10 +247,11 @@
 
       function selectAll() {
         if (here.length == students.length) {
-          here = Array.from({ length: students.length }, (_, i) => String(i++));
-        } else {
           here = [];
+        } else {
+          here = Array.from({ length: students.length }, (_, i) => String(i++));
         }
+
         list(students);
       }
 
