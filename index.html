@@ -414,7 +414,7 @@
 
         link += `${students
           .filter((student) => !here.includes(String(student.id)))
-          .map((item) => `- ${item.name}n`)
+          .map((item) => `- ${item.name}`)
           .join("")}`;
 
         window.location = link;
