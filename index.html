@@ -411,7 +411,7 @@
         clearReportButton.removeAttribute("disabled");
         location.reload();
       });
-      sendReportButton.addEventListener("touchstart", () => {
+      sendReportButton.addEventListener("pointerdown", () => {
         saveReportButton.href += drawReport();
       });
     </script>
