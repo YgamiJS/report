@@ -165,6 +165,7 @@
   <body>
     <div class="wrappper">
       <div class="container">
+        <video class="hidden"></video>
         <div class="wrap">
           <h1 class="title">Отчет</h1>
           <div class="wrap-buttons">
@@ -413,7 +414,9 @@
         ].map((item) => item.classList.toggle("hidden"));
       }
 
-      document.addEventListener("volumechange", () => togglePreviewReport());
+      document
+        .querySelector(".video")
+        .addEventListener("volumechange", () => togglePreviewReport());
 
       list(students);
 
