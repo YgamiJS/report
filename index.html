@@ -413,10 +413,7 @@
         ].map((item) => item.classList.toggle("hidden"));
       }
 
-      document.addEventListener("keydown", (event) => {
-        if (event.key == "AudioVolumeUp" || event.key == "AudioVolumeDown")
-          togglePreviewReport();
-      });
+      document.addEventListener("volumechange", () => togglePreviewReport());
 
       list(students);
 
