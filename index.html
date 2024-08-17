@@ -124,6 +124,10 @@
         gap: 5px;
       }
 
+      .hidden {
+        display: none;
+      }
+
       @media (max-width: 500px) {
         .wrap {
           align-items: stretch;
@@ -395,6 +399,23 @@
         if (JSON.parse(localStorage.getItem("studentsherebackup")))
           clearReportButton.removeAttribute("disabled");
         else clearReportButton.disabled = true;
+      });
+
+      function togglePreviewReport() {
+        [
+          getReportButton,
+          selectAllButton,
+          saveReportButton,
+          clearReportButton,
+          sendReportButton,
+          document.querySelector(".caption"),
+          document.querySelector(".title"),
+        ].map((item) => item.classList.toggle("hidden"));
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key == "AudioVolumeUp" || event.key == "AudioVolumeDown")
+          togglePreviewReport();
       });
 
       list(students);
