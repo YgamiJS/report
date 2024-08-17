@@ -185,11 +185,7 @@
             <button class="button save" disabled="true">Сохранить</button>
             <button class="button clear">Сброс</button>
           </div>
-          <a
-            class="button send"
-            href="https://api.whatsapp.com/send?phone=79272570537&text="
-            >Отправить</a
-          >
+          <button class="button send">Отправить</button>
         </div>
       </div>
     </div>
@@ -313,11 +309,11 @@
         const str =
           here.length < students.length
             ? `
-    Отсутствуют:\n\n${students
-      .filter((student) => !here.includes(String(student.id)))
-      .map((item) => `- ${item.name}\n\n`)
-      .join("")}
-    `
+      Отсутствуют:\n\n${students
+        .filter((student) => !here.includes(String(student.id)))
+        .map((item) => `- ${item.name}\n\n`)
+        .join("")}
+      `
             : "Присутствуют все";
 
         navigator.clipboard.writeText(str.trim());
@@ -334,15 +330,15 @@
           tr.className = "report__tr";
 
           tr.innerHTML = `
-        <td class="report__td report__td_name">
-            ${item.name}
-        </td>
-        <td class="report__td report__td_here">
-            <input class="report__here" type="checkbox" ${
-              here.includes(String(item.id)) ? "checked" : ""
-            } data-id="${item.id}"/>              
-        </td>
-          `;
+          <td class="report__td report__td_name">
+              ${item.name}
+          </td>
+          <td class="report__td report__td_here">
+              <input class="report__here" type="checkbox" ${
+                here.includes(String(item.id)) ? "checked" : ""
+              } data-id="${item.id}"/>
+          </td>
+            `;
 
           reportBody.appendChild(tr);
 
@@ -411,8 +407,14 @@
         clearReportButton.removeAttribute("disabled");
         location.reload();
       });
-      sendReportButton.addEventListener("pointerdown", () => {
-        saveReportButton.href += drawReport();
+      sendReportButton.addEventListener("pointerdown", async () => {
+        drawReport();
+
+        let link = "https://api.whatsapp.com/send?phone=79272570537&text=";
+
+        link += await window.navigator.clipboard.readText();
+
+        window.location = link;
       });
     </script>
   </body>
