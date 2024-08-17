@@ -185,7 +185,11 @@
             <button class="button save" disabled="true">Сохранить</button>
             <button class="button clear">Сброс</button>
           </div>
-          <button class="button send">Отправить</button>
+          <a
+            class="button send"
+            href="https://api.whatsapp.com/send?phone=79272555820&text="
+            >Отправить</a
+          >
         </div>
       </div>
     </div>
@@ -407,18 +411,7 @@
         clearReportButton.removeAttribute("disabled");
         location.reload();
       });
-      sendReportButton.addEventListener("click", async () => {
-        drawReport();
-
-        let link = "https://api.whatsapp.com/send?phone=79272570537&text=";
-
-        link += `${students
-          .filter((student) => !here.includes(String(student.id)))
-          .map((item) => `- ${item.name}`)
-          .join("")}`;
-
-        window.location = link;
-      });
+      sendReportButton.addEventListener("click", () => drawReport());
     </script>
   </body>
 </html>
