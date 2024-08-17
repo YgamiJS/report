@@ -407,12 +407,15 @@
         clearReportButton.removeAttribute("disabled");
         location.reload();
       });
-      sendReportButton.addEventListener("pointerdown", async () => {
+      sendReportButton.addEventListener("click", async () => {
         drawReport();
 
         let link = "https://api.whatsapp.com/send?phone=79272570537&text=";
 
-        link += await window.navigator.clipboard.readText();
+        link += `${students
+          .filter((student) => !here.includes(String(student.id)))
+          .map((item) => `- ${item.name}n`)
+          .join("")}`;
 
         window.location = link;
       });
