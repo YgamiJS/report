@@ -129,7 +129,12 @@
       }
 
       .short {
-        padding: 5px;
+        padding: 5px !important;
+      }
+
+      .report__td.short {
+        padding: 3px !important;
+        border-bottom: 1px solid black;
       }
 
       @media (max-width: 500px) {
@@ -420,7 +425,7 @@
 
         [
           document.querySelector(".container"),
-          document.querySelector(".report__td_name"),
+          ...document.querySelectorAll(".report__td"),
           document.querySelector(".report"),
         ].map((item) => item.classList.toggle("short"));
       }
