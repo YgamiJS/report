@@ -125,10 +125,10 @@
       }
 
       .hidden {
-        display: none;
+        display: none !important;
       }
 
-      .container.short {
+      .short {
         padding: 5px;
       }
 
@@ -415,9 +415,14 @@
           sendReportButton,
           document.querySelector(".caption"),
           document.querySelector(".title"),
+          document.querySelector(".wrap"),
         ].map((item) => item.classList.toggle("hidden"));
 
-        document.querySelector(".container").classList.toggle("short");
+        [
+          document.querySelector(".container"),
+          document.querySelector(".report__td_name"),
+          document.querySelector(".report"),
+        ].map((item) => item.classList.toggle("short"));
       }
 
       list(students);
