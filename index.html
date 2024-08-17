@@ -135,12 +135,24 @@
         }
 
         .wrap-down-buttons {
-          justify-content: space-between;
+          /* justify-content: space-between; */
+          flex-direction: column;
         }
 
         .save,
         .clear {
           width: 50%;
+        }
+
+        .inner-down-buttons {
+          display: flex;
+          gap: 5px;
+        }
+
+        .send {
+          width: 100%;
+          text-align: center;
+          display: block;
         }
       }
     </style>
@@ -169,8 +181,15 @@
           <tbody class="report__tbody"></tbody>
         </table>
         <div class="wrap-down-buttons">
-          <button class="button save">Сохранить</button>
-          <button class="button clear">Сброс</button>
+          <div class="inner-down-buttons">
+            <button class="button save" disabled="true">Сохранить</button>
+            <button class="button clear">Сброс</button>
+          </div>
+          <a
+            class="button send"
+            href="https://api.whatsapp.com/send?phone=79272570537&text="
+            >Отправить</a
+          >
         </div>
       </div>
     </div>
@@ -180,6 +199,7 @@
       const selectAllButton = document.querySelector(".selectAll");
       const saveReportButton = document.querySelector(".save");
       const clearReportButton = document.querySelector(".clear");
+      const sendReportButton = document.querySelector(".send");
 
       const students = [
         {
@@ -277,9 +297,16 @@
       }
 
       function addOrRemoveStudentHere(id) {
-        here.includes(id)
-          ? (here = here.filter((studentId) => studentId != id))
-          : here.push(id);
+        if (here.includes(id)) {
+          here = here.filter((studentId) => studentId != id);
+
+          if (!here.length) {
+            saveReportButton.disabled = true;
+          }
+        } else {
+          here.push(id);
+          saveReportButton.removeAttribute("disabled");
+        }
       }
 
       function drawReport() {
@@ -332,6 +359,8 @@
 
         list(students);
 
+        saveReportButton.disabled = true;
+
         alert("Все пришедшие отмечены?");
       }
 
@@ -381,6 +410,9 @@
         clearStudentsReport();
         clearReportButton.removeAttribute("disabled");
         location.reload();
+      });
+      sendReportButton.addEventListener("click", () => {
+        saveReportButton.href += drawReport();
       });
     </script>
   </body>
