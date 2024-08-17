@@ -128,6 +128,10 @@
         display: none;
       }
 
+      .container.short {
+        padding: 5px;
+      }
+
       @media (max-width: 500px) {
         .wrap {
           align-items: stretch;
@@ -165,7 +169,6 @@
   <body>
     <div class="wrappper">
       <div class="container">
-        <video class="video hidden"></video>
         <div class="wrap">
           <h1 class="title">Отчет</h1>
           <div class="wrap-buttons">
@@ -179,7 +182,7 @@
           </caption>
           <thead class="report__thead">
             <tr class="report__tr">
-              <td class="report__td">Имя Фамилия:</td>
+              <td class="report__td reportPreview">Имя Фамилия:</td>
               <td class="report__td">Присутствие:</td>
             </tr>
           </thead>
@@ -205,6 +208,7 @@
       const saveReportButton = document.querySelector(".save");
       const clearReportButton = document.querySelector(".clear");
       const sendReportButton = document.querySelector(".send");
+      const reportPreviewButton = document.querySelector(".reportPreview");
 
       const students = [
         {
@@ -412,13 +416,15 @@
           document.querySelector(".caption"),
           document.querySelector(".title"),
         ].map((item) => item.classList.toggle("hidden"));
+
+        document.querySelector(".container").classList.toggle("short");
       }
 
-      document
-        .querySelector(".video")
-        .addEventListener("volumechange", () => togglePreviewReport());
-
       list(students);
+
+      reportPreviewButton.addEventListener("click", () =>
+        togglePreviewReport()
+      );
 
       getReportButton.addEventListener("click", () => drawReport());
       selectAllButton.addEventListener("click", () => selectAll());
