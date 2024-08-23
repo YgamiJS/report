@@ -51,7 +51,7 @@
       }
 
       .report {
-        border: 3px solid #2f6ea5;
+        border: 3px solid #000060;
         width: 100%;
         height: 100%;
         border-radius: 15px;
@@ -102,7 +102,7 @@
         height: min-content;
         padding: 15px;
         border-radius: 5px;
-        border: 3px solid #2f6ea5;
+        border: 3px solid #000060;
         cursor: pointer;
       }
 
@@ -133,7 +133,7 @@
       }
 
       .report__td.short {
-        padding: 2.5px !important;
+        padding: 2.9px !important;
         border-bottom: 1px solid black;
       }
 
@@ -148,7 +148,6 @@
         }
 
         .wrap-down-buttons {
-          /* justify-content: space-between; */
           flex-direction: column;
         }
 
@@ -449,6 +448,56 @@
         location.reload();
       });
       sendReportButton.addEventListener("click", () => drawReport());
+    </script>
+    <script>
+      if ("serviceWorker" in navigator && "PushManager" in window) {
+        navigator.serviceWorker
+          .register("sw.js")
+          .then(function (registration) {
+            console.log("Service Worker зарегистрирован", registration);
+
+            return Notification.requestPermission();
+          })
+          .then(function (permission) {
+            if (permission === "granted") {
+              console.log("Разрешение на уведомления предоставлено");
+              scheduleNotification();
+            }
+          });
+      } else {
+        console.error("Push уведомления не поддерживаются");
+      }
+
+      function scheduleNotification() {
+        const now = new Date();
+        const nextNotify = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate(),
+          8,
+          28,
+          0,
+          0
+        );
+
+        if (now > nextNotify) {
+          nextNotify.setDate(nextNotify.getDate() + 1);
+        }
+
+        const delay = nextNotify - now;
+        setTimeout(() => {
+          navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification(
+              "Уведомление о ежедневном отправки отчета",
+              {
+                body: "Уведомление о ежедневном отправки отчета",
+              }
+            );
+          });
+
+          scheduleNotification();
+        }, delay);
+      }
     </script>
   </body>
 </html>
