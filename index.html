@@ -168,6 +168,14 @@
           display: block;
         }
       }
+
+      .insert {
+
+        padding: 5px 10px;
+  background: #000275;
+  color: white;
+  border-radius: 5px;
+      }
     </style>
     <title>Отчет</title>
   </head>
@@ -336,7 +344,7 @@
         const str =
           here.length < students.length
             ? `
-      Отсутствуют:\n\n${students
+      Отсутствуют:</br></br>${students
         .filter((student) => !here.includes(String(student.id)))
         .map((item) => `- ${item.name}</br></br>`)
         .join("")}
