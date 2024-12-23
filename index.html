@@ -187,6 +187,7 @@
           <div class="wrap-buttons">
             <button class="button selectAll">Выбрать всех</button>
             <button class="button getReport">Получить отчет</button>
+            <button class="button-x getReport">Копировать</button>
           </div>
         </div>
         <div class="insert"></div>
@@ -215,6 +216,11 @@
         </div>
       </div>
     </div>
+    <script>
+      document.querySelector(".button-x").addEventListener("click" , () => {
+        navigator.clipboard.writeText(document.querySelector(".insert").textContent);
+      });
+    </script>
     <script>
       const reportBody = document.querySelector(".report__tbody");
       const getReportButton = document.querySelector(".getReport");
