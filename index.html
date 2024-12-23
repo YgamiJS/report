@@ -181,6 +181,7 @@
             <button class="button getReport">Получить отчет</button>
           </div>
         </div>
+        <div class="insert"></div>
         <table class="report">
           <caption class="caption">
             Ученики
@@ -300,6 +301,10 @@
           id: 20,
           name: "Сахаров Ярослав",
         },
+        {
+          id: 21,
+          name: "Ютландова",
+        },
       ];
 
       let here = [];
@@ -339,6 +344,8 @@
             : "Присутствуют все";
 
         navigator.clipboard.writeText(str.trim());
+
+        document.querySelector(".insert").textContent = str.trim();
 
         alert("Скопировано");
       }
