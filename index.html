@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="#" />
+    <link rel="manifest" href="manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       *,
@@ -282,11 +283,11 @@
         {
           id: 16,
           name: "Тихонова",
-        }, 
+        },
         {
           id: 17,
-          name: "Фаустов", 
-        }, 
+          name: "Фаустов",
+        },
         {
           id: 18,
           name: "Чиликин",
@@ -501,6 +502,23 @@
 
           scheduleNotification();
         }, delay);
+      }
+    </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("service-worker.js")
+            .then((registration) => {
+              console.log(
+                "Service Worker зарегистрирован с областью:",
+                registration.scope
+              );
+            })
+            .catch((error) => {
+              console.error("Ошибка регистрации Service Worker:", error);
+            });
+        });
       }
     </script>
   </body>
