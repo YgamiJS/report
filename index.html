@@ -338,14 +338,14 @@
             ? `
       Отсутствуют:\n\n${students
         .filter((student) => !here.includes(String(student.id)))
-        .map((item) => `- ${item.name}\n\n`)
+        .map((item) => `- ${item.name}</br></br>`)
         .join("")}
       `
             : "Присутствуют все";
 
         navigator.clipboard.writeText(str.trim());
 
-        document.querySelector(".insert").textContent = str.trim();
+        document.querySelector(".insert").innerHTML = str.trim();
 
         alert("Скопировано");
       }
