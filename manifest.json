@@ -1,13 +1,24 @@
 {
-  "name": "PWA",
-  "short_name": "PWA",
+  "name": "Отчёт",
+  "short_name": "Отчёт",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#e9e8e8",
+  "theme_color": "#e9e8e8",
+  "display": "fullscreen",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "file1.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "file2.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "file3.png",
       "sizes": "192x192",
       "type": "image/png"
     }
