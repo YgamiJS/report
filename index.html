@@ -366,7 +366,7 @@
         const str =
           here.length < students.length
             ? `
-      Отсутствуют:</br></br>${students
+      Отсутствуют:\n\n${students
         .filter((student) => !here.includes(String(student.id)))
         .map((item) => `- ${item.name}\n\n`)
         .join("")}
