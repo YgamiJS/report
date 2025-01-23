@@ -368,7 +368,7 @@
             ? `
       Отсутствуют:</br></br>${students
         .filter((student) => !here.includes(String(student.id)))
-        .map((item) => `- ${item.name}/n/n`)
+        .map((item) => `- ${item.name}\n\n`)
         .join("")}
       `
             : "Присутствуют все";
