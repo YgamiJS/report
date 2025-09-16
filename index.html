@@ -414,10 +414,13 @@
           }
         });
 
+        let zmx = notHereObedniki.map((guy) => `${guy} </br>`);
+
         document.querySelector(".obed").innerHTML = `
         Всего: ${obedniki.length} <br/>
         Питаются: ${hereObedniki.length} <br/>
-        Отсутствуют: ${notHereObedniki.map((guy) => guy)}
+        Отсутствуют: ${zmx}
+                       
         `;
 
         alert("Скопировано");
