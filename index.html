@@ -520,9 +520,31 @@
         } else {
           showList = students.filter((item) => item.profile == currentType);
 
+          let typeOfProfile = "";
+
+          switch(currentType) {
+              case "matinf":
+                typeOfProfile = "Матиматика & Информатика"
+              break;
+                case "matob":
+                typeOfProfile = "Матиматика & Обществознание"
+              break;
+
+                case "ximbio":
+                typeOfProfile = "Химия & Биология"
+              break;
+
+               case "istob":
+                typeOfProfile = "История & Обществознание"
+              break;
+              
+              
+          }
+
            const str =
           here.length < showList.length
             ? `
+      Профиль: ${typeOfProfile}
       Отсутствуют:\n\n${showList
         .filter((student) => !here.includes(String(student.id)))
         .map((item) => `- ${item.name}\n\n`)
