@@ -421,16 +421,36 @@
       });
 
       function selectAll() {
-        if (here.length == students.length) {
+
+        let showList = [];
+
+        if(currentType == "all") {
+          showList = students;
+
+            if (here.length == students.length) {
           here = [];
         } else {
           here = Array.from({ length: students.length }, (_, i) => String(i++));
         }
+          
+        } else {
+          showList = students.filter((item) => item.profile == currentType);
 
-        list(students);
+          if (here.length == showList.length) {
+          here = [];
+        } else {
+          here = Array.from({ length: showList.length }, (_, i) => String(i++));
+        }
+        }
+        
+      
+      
+
+        list(showList);
       }
 
       function addOrRemoveStudentHere(id) {
+        
         if (here.includes(id)) {
           here = here.filter((studentId) => studentId != id);
 
@@ -444,7 +464,13 @@
       }
 
       function drawReport() {
-        const str =
+
+        let showList = [];
+
+        if(currentType == "all") {
+          showList = students;
+
+           const str =
           here.length < students.length
             ? `
       Отсутствуют:\n\n${students
@@ -481,6 +507,51 @@
         `;
 
         alert("Скопировано");
+          
+        } else {
+          showList = students.filter((item) => item.profile == currentType);
+
+           const str =
+          here.length < showList.length
+            ? `
+      Отсутствуют:\n\n${showList
+        .filter((student) => !here.includes(String(student.id)))
+        .map((item) => `- ${item.name}\n\n`)
+        .join("")}
+      `
+            : "Присутствуют все";
+
+        navigator.clipboard.writeText(str.trim());
+
+        document.querySelector(".insert").innerHTML = str.trim();
+
+        const obedniki = ["2", "8", "11", "15", "19", "20" ,"22"];
+
+        let hereObedniki = [];
+        let notHereObedniki = [];
+
+        obedniki.forEach((guy) => {
+          if (here.includes(guy)) {
+            hereObedniki.push(showList.find((st) => st.id == guy).name);
+          } else {
+            notHereObedniki.push(showList.find((st) => st.id == guy).name);
+          }
+        });
+
+        let zmx = notHereObedniki.map((guy) => `${guy} </br>`);
+
+        document.querySelector(".obed").innerHTML = `
+        Всего: ${obedniki.length} <br/>
+        Питаются: ${hereObedniki.length} <br/>
+        Отсутствуют: ${zmx}
+                       
+        `;
+
+        alert("Скопировано");
+        }
+        
+        
+       
       }
 
       function list(students) {
