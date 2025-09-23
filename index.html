@@ -213,7 +213,7 @@
         <div class="wrap">
           <h1 class="title">Отчет</h1>
           <div class="wrap-buttons">
-            <button class="button selectAll">Выбрать всех</button>
+           <!-- <button class="button selectAll">Выбрать всех</button> -->
             <button class="button getReport">Получить отчет</button>
           </div>
         </div>
@@ -546,6 +546,7 @@
           here.length < showList.length
             ? `
       Профиль: ${typeOfProfile}
+      
       Отсутствуют:\n\n${showList
         .filter((student) => !here.includes(String(student.id)))
         .map((item) => `- ${item.name}\n\n`)
