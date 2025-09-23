@@ -525,27 +525,7 @@
 
         document.querySelector(".insert").innerHTML = str.trim();
 
-        const obedniki = ["2", "8", "11", "15", "19", "20" ,"22"];
-
-        let hereObedniki = [];
-        let notHereObedniki = [];
-
-        obedniki.forEach((guy) => {
-          if (here.includes(guy)) {
-            hereObedniki.push(showList.find((st) => st.id == guy).name);
-          } else {
-            notHereObedniki.push(showList.find((st) => st.id == guy).name);
-          }
-        });
-
-        let zmx = notHereObedniki.map((guy) => `${guy} </br>`);
-
-        document.querySelector(".obed").innerHTML = `
-        Всего: ${obedniki.length} <br/>
-        Питаются: ${hereObedniki.length} <br/>
-        Отсутствуют: ${zmx}
-                       
-        `;
+        
 
         alert("Скопировано");
         }
