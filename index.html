@@ -208,6 +208,10 @@
           </div>
         </div>
         <div class="obed"></div>
+        <button class="matinf btnprofile" data-type="matinf">Мат&Инф</button>
+        <button class="matob btnprofile" data-type="matob">Мат&Общ</button>
+        <button class="ximbio btnprofile" data-type="ximbio">Хим&Био</button>
+        <button class="istob btnprofile" data-type="istob">История&Общ</button>
        <div class="insert"></div>
         <table class="report">
           <caption class="caption">
@@ -250,118 +254,170 @@
       const sendReportButton = document.querySelector(".send");
       const reportPreviewButton = document.querySelector(".reportPreview");
 
-     const students = [
+       const allProfilesButton = document.querySelectorAll(". btnprofile");
+
+      let currentType = "all";
+
+      
+
+
+    const students = [
   {
     id: 0,
     name: "Барич",
+    profile: "ximbio"
   },
   {
     id: 1,
     name: "Брюхин",
+    profile: "matinf"
   },
   {
     id: 2,
     name: "Демидов",
+    profile: "matob"
   },
   {
     id: 3,
     name: "Джавадов",
+    profile: "istob"
   },
   {
     id: 4,
     name: "Дьяченко",
+    profile: "matinf"
   },
   {
     id: 5,
     name: "Золотарев",
+    profile: "matinf"
   },
   {
     id: 6,
     name: "Ковшар",
+    profile: "matinf"
   },
   {
     id: 7,
     name: "Котельников",
+    profile: "ximbio"
   },
   {
     id: 8,
     name: "Комков",
+    profile: "istob"
   },
   {
     id: 9,
     name: "Кочетова",
+    profile: "istob"
   },
   {
     id: 10,
     name: "Кузнецов",
+    profile: "matob"
   },
   {
     id: 11,
     name: "Крючков",
+    profile: "istob"
   },
   {
     id: 12,
     name: "Лучников",
+    profile: "ximbio"
   },
   {
     id: 13,
     name: "Мазур",
+    profile: "ximbio"
   },
   {
     id: 14,
     name: "Манучарян",
+    profile: "istob"
   },
   {
     id: 15,
     name: "Милютин",
+    profile: "matinf"
   },
   {
     id: 16,
     name: "Насонов",
+    profile: "istob"
   },
   {
     id: 17,
     name: "Паршкова",
+    profile: "matob"
   },
   {
     id: 18,
     name: "Попов",
+    profile: "matinf"
   },
   {
     id: 19,
     name: "Поляков",
+    profile: "matob"
   },
   {
     id: 20,
     name: "Рыбникова",
+    profile: "ximbio"
   },
   {
     id: 21,
     name: "Сахаров",
+    profile: "matinf"
   },
   {
     id: 22,
     name: "Фаустов",
+    profile: "matinf"
   },
   {
     id: 23,
     name: "Чиликин",
+    profile: "matob"
   },
   {
     id: 24,
     name: "Ширин",
-  },
+    profile: "istob"},
   {
     id: 25,
     name: "Ютландова",
+    profile: "istob"
   },
   {
     id: 26,
     name: "Друзь",
+    profile: "matinf"
   }
 ];
 
+      
+
       let here = [];
+
+      allProfilesButton.forEach((item) => {
+        item.addEventListener("click", (event) => {
+          const target = event.target;
+          currentType = target.dataset.type;    
+
+          let showList = [];
+
+        if(currentType == "all") {
+          showList = students;
+        } else {
+          showList = students.filter((item) => item.profile == currentType);
+        }
+
+          list(showList);
+        });
+      });
 
       function selectAll() {
         if (here.length == students.length) {
@@ -428,7 +484,7 @@
 
       function list(students) {
         reportBody.innerHTML = "";
-
+        
         students.forEach((item) => {
           const tr = document.createElement("tr");
 
